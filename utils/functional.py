@@ -80,12 +80,21 @@ def load_label(filepath):
     return char2id, id2char
 
 
+def sentence_to_label(sentence, char2id):
+    labeled = str()
+
+    for ch in sentence:
+        labeled += (str(char2id[ch]) + ' ')
+
+    return labeled[:-1]
+
+
 def flac2pcm(src_path, file_name, leave_trail):
-    flac_data, sr = sf.read(src_path + file_name + '.flac')
-    sf.write(src_path + file_name + '.wav', flac_data, sr, format='WAV', endian='LITTLE', subtype='PCM_16')
+    flac_data, sr = sf.read(src_path + '/' + file_name + '.flac')
+    sf.write(src_path + '/' + file_name + '.wav', flac_data, sr, format='WAV', endian='LITTLE', subtype='PCM_16')
 
     wav2pcm = Wav2Pcm()
-    wav2pcm(src_path, file_name)
+    wav2pcm(src_path + '/', file_name)
 
     if not leave_trail:
-        os.remove(src_path + file_name + '.wav')
+        os.remove(src_path + '/' + file_name + '.wav')
