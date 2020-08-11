@@ -4,7 +4,8 @@ from utils.preprocess import preprocess, create_labels, create_script, collect
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='LibriSpeech Dataset Preprocessor')
-    parser.add_argument('--src_path', type=str, default="Check YOUR PATH for LibriSpeech Dataset")
+    parser.add_argument('--src_path', type=str, default="Check YOUR PATH for LibriSpeech Dataset\
+                                                        ex) 'C:/LibriSpeech/train_clean_100/'")
     parser.add_argument('--final_dest', type=str, default="Set YOUR PATH for all preprocessed audio and script files")
     parser.add_argument('--label_dest_path', type=str, default="Set YOUR PATH to save labeled csv file")
     parser.add_argument('--script_name', type=str, default="Set script file name")
@@ -24,5 +25,5 @@ if __name__ == '__main__':
 
     preprocess(options.src_path, options.leave_trail)
     create_labels(options.src_path, options.label_dest_path)
-    create_script(options.final_dest, options.script_name)
-    collect(options.src_path, options.final_dest, options.collect_trail)
+    create_script(options.label_dest_path, options.final_dest, options.script_name)
+    collect(options.src_path, options.final_dest, options.script_name, options.collect_trail)
